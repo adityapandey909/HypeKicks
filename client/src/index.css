@@ -20,6 +20,22 @@
   --shadow-card: 0 16px 36px rgba(25, 30, 40, 0.1);
 }
 
+:root[data-theme="dark"] {
+  --bg-start: #111620;
+  --bg-end: #0a0d14;
+  --surface: rgba(18, 24, 34, 0.86);
+  --surface-strong: #141b27;
+  --line: rgba(195, 208, 235, 0.2);
+  --text-primary: #edf3ff;
+  --text-secondary: #b6c2db;
+  --text-muted: #8896b3;
+  --accent: #ff7b4d;
+  --accent-strong: #ff8f66;
+  --brand-ink: #4b638c;
+  --shadow-soft: 0 30px 65px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 16px 36px rgba(0, 0, 0, 0.42);
+}
+
 *,
 *::before,
 *::after {
@@ -39,6 +55,14 @@ body {
   background:
     radial-gradient(circle at 8% 10%, rgba(255, 95, 54, 0.16), transparent 34%),
     radial-gradient(circle at 90% 0%, rgba(33, 51, 77, 0.18), transparent 30%),
+    linear-gradient(145deg, var(--bg-start), var(--bg-end));
+  transition: background 260ms ease, color 260ms ease;
+}
+
+:root[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at 12% 14%, rgba(255, 123, 77, 0.16), transparent 32%),
+    radial-gradient(circle at 88% 0%, rgba(95, 122, 175, 0.25), transparent 34%),
     linear-gradient(145deg, var(--bg-start), var(--bg-end));
 }
 
@@ -193,6 +217,36 @@ a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0.2rem;
+}
+
+.theme-toggle button {
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.62rem;
+  cursor: pointer;
+  transition: background 220ms ease, color 220ms ease;
+}
+
+.theme-toggle button.active {
+  background: var(--brand-ink);
+  color: #fff;
 }
 
 .search-button,
@@ -1539,4 +1593,106 @@ a {
   50% {
     transform: translate3d(0, 18px, 0);
   }
+}
+
+:root[data-theme="dark"] .noise-layer {
+  opacity: 0.08;
+  background-image: radial-gradient(rgba(240, 245, 255, 0.5) 0.45px, transparent 0.45px);
+  mix-blend-mode: soft-light;
+}
+
+:root[data-theme="dark"] .blob-one {
+  background: rgba(255, 123, 77, 0.42);
+}
+
+:root[data-theme="dark"] .blob-two {
+  background: rgba(80, 115, 180, 0.36);
+}
+
+:root[data-theme="dark"] .topbar {
+  background: rgba(10, 14, 22, 0.78);
+  border-bottom-color: rgba(187, 203, 235, 0.14);
+}
+
+:root[data-theme="dark"] .theme-toggle,
+:root[data-theme="dark"] .search-button,
+:root[data-theme="dark"] .cart-button,
+:root[data-theme="dark"] .filter-bar input,
+:root[data-theme="dark"] .filter-bar select,
+:root[data-theme="dark"] .ghost-btn,
+:root[data-theme="dark"] .clear-btn,
+:root[data-theme="dark"] .qty-row button,
+:root[data-theme="dark"] .detail-main-image,
+:root[data-theme="dark"] .detail-thumbs button,
+:root[data-theme="dark"] .size-grid button,
+:root[data-theme="dark"] .checkout-fields input,
+:root[data-theme="dark"] .admin-form input,
+:root[data-theme="dark"] .admin-form textarea,
+:root[data-theme="dark"] .admin-form select,
+:root[data-theme="dark"] .auth-input {
+  background: rgba(15, 22, 34, 0.72);
+  border-color: rgba(186, 202, 232, 0.2);
+  color: var(--text-primary);
+}
+
+:root[data-theme="dark"] .hero-panel,
+:root[data-theme="dark"] .auth-card {
+  background:
+    linear-gradient(120deg, rgba(18, 26, 40, 0.94), rgba(18, 26, 40, 0.76)),
+    radial-gradient(circle at top right, rgba(255, 123, 77, 0.2), transparent 44%);
+}
+
+:root[data-theme="dark"] .metric-card,
+:root[data-theme="dark"] .skeleton-card,
+:root[data-theme="dark"] .empty-state,
+:root[data-theme="dark"] .cart-drawer,
+:root[data-theme="dark"] .related-card,
+:root[data-theme="dark"] .checkout-panel,
+:root[data-theme="dark"] .admin-form,
+:root[data-theme="dark"] .admin-list,
+:root[data-theme="dark"] .order-card {
+  background: rgba(18, 24, 34, 0.86);
+  border-color: rgba(186, 202, 232, 0.2);
+}
+
+:root[data-theme="dark"] .sneaker-media {
+  background:
+    radial-gradient(circle at top, rgba(255, 123, 77, 0.15), transparent 52%),
+    linear-gradient(165deg, rgba(21, 30, 44, 0.9), rgba(14, 20, 30, 0.86));
+}
+
+:root[data-theme="dark"] .skeleton-image {
+  background: linear-gradient(135deg, rgba(119, 137, 170, 0.25), rgba(119, 137, 170, 0.1));
+}
+
+:root[data-theme="dark"] .skeleton-line {
+  background: rgba(119, 137, 170, 0.25);
+}
+
+:root[data-theme="dark"] .cart-drawer {
+  border-left-color: rgba(186, 202, 232, 0.2);
+}
+
+:root[data-theme="dark"] .drawer-overlay {
+  background: rgba(5, 8, 12, 0.55);
+}
+
+:root[data-theme="dark"] .brand-chip {
+  background: rgba(8, 12, 20, 0.86);
+  color: #ecf3ff;
+}
+
+:root[data-theme="dark"] .stock-pill.in,
+:root[data-theme="dark"] .auth-success {
+  color: #70d7a9;
+}
+
+:root[data-theme="dark"] .stock-pill.out,
+:root[data-theme="dark"] .auth-error,
+:root[data-theme="dark"] .drops-error {
+  color: #ffb5a2;
+}
+
+:root[data-theme="dark"] .auth-link-preview a {
+  color: #8bb4ff;
 }

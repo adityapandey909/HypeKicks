@@ -5,6 +5,7 @@ import ProductGrid from "./components/ProductGrid";
 import api from "./lib/api";
 import { clearAuth, getAuthState, saveAuth } from "./lib/auth";
 import { computeSubtotal, itemKey, loadCart, saveCart } from "./lib/cart";
+import { applyTheme, loadThemePreference, saveThemePreference } from "./lib/theme";
 import Admin from "../pages/Admin";
 import Checkout from "../pages/Checkout";
 import CheckoutCancel from "../pages/CheckoutCancel";
@@ -47,6 +48,7 @@ export default function App() {
   const [auth, setAuth] = useState(getAuthState());
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState(loadCart());
+  const [themeMode, setThemeMode] = useState(() => loadThemePreference());
 
   useEffect(() => {
     const onPopState = () => setRoute(currentRoute());
@@ -67,6 +69,11 @@ export default function App() {
   useEffect(() => {
     saveCart(cartItems);
   }, [cartItems]);
+
+  useEffect(() => {
+    applyTheme(themeMode);
+    saveThemePreference(themeMode);
+  }, [themeMode]);
 
   useEffect(() => {
     let active = true;
@@ -294,6 +301,8 @@ export default function App() {
         user={auth.user}
         onLogout={logout}
         onNavigate={navigate}
+        themeMode={themeMode}
+        onThemeChange={setThemeMode}
       />
 
       <main className="store-main">{content}</main>

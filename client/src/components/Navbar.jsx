@@ -1,3 +1,5 @@
+import { THEME_MODES } from "../lib/theme";
+
 const navLinks = [
   { label: "Latest", path: "/#drops" },
   { label: "Running", path: "/?category=Running#drops" },
@@ -5,7 +7,15 @@ const navLinks = [
   { label: "Lifestyle", path: "/?category=Lifestyle#drops" },
 ];
 
-export default function Navbar({ cartCount, onCartClick, user, onLogout, onNavigate }) {
+export default function Navbar({
+  cartCount,
+  onCartClick,
+  user,
+  onLogout,
+  onNavigate,
+  themeMode,
+  onThemeChange,
+}) {
   return (
     <header className="topbar">
       <div className="topbar-inner">
@@ -30,6 +40,23 @@ export default function Navbar({ cartCount, onCartClick, user, onLogout, onNavig
         </nav>
 
         <div className="top-actions">
+          <div className="theme-toggle" role="group" aria-label="Theme">
+            <button
+              type="button"
+              className={themeMode === THEME_MODES.DEFAULT ? "active" : ""}
+              onClick={() => onThemeChange(THEME_MODES.DEFAULT)}
+            >
+              Default
+            </button>
+            <button
+              type="button"
+              className={themeMode === THEME_MODES.DARK ? "active" : ""}
+              onClick={() => onThemeChange(THEME_MODES.DARK)}
+            >
+              Dark
+            </button>
+          </div>
+
           {user ? (
             <>
               <button type="button" className="search-button" onClick={() => onNavigate("/orders")}>
