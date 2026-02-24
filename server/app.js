@@ -8,16 +8,31 @@ import securityHeaders from "./middleware/securityHeaders.js";
 import { createRateLimiter } from "./middleware/rateLimit.js";
 import requestLogger from "./middleware/requestLogger.js";
 
+function toOrigin(input = "") {
+  const trimmed = String(input || "").trim();
+  if (!trimmed) return "";
+
+  try {
+    return new URL(trimmed).origin;
+  } catch {
+    return "";
+  }
+}
+
 function buildCorsOptions() {
   const allowedOrigins = (process.env.CORS_ORIGINS || "")
     .split(",")
     .map((value) => value.trim())
     .filter(Boolean);
+  const clientOrigin = toOrigin(process.env.CLIENT_URL);
+  const pagesOrigin = toOrigin(process.env.GH_PAGES_ORIGIN || "https://adityapandey909.github.io");
 
   const defaults = [
     "http://localhost:3000",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    clientOrigin,
+    pagesOrigin,
   ];
 
   const originAllowlist = new Set([...defaults, ...allowedOrigins]);

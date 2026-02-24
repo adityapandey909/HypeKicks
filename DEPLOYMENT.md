@@ -12,6 +12,7 @@
    - `JWT_SECRET`
    - `CLIENT_URL` (your frontend URL)
    - `CORS_ORIGINS` (comma separated, include frontend URL)
+   - `GH_PAGES_ORIGIN` (for GitHub Pages frontend origin, e.g. `https://adityapandey909.github.io`)
    - `STRIPE_SECRET_KEY` (required for Stripe checkout)
    - `STRIPE_WEBHOOK_SECRET` (required for Stripe webhook verification)
    - `EMAIL_FROM`
