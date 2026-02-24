@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="hkAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff5f36" />
+      <stop offset="100%" stop-color="#d64a27" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#182132" />
+  <circle cx="32" cy="32" r="25" fill="none" stroke="url(#hkAccent)" stroke-width="4" />
+  <path
+    d="M18 18v28h6v-11h8v11h6V18h-6v11h-8V18h-6zm27 0v13l10-13h7L49 34l13 12h-8l-9-8-2 2v6h-6V18h6z"
+    fill="#f6f2e9"
+  />
+</svg>
