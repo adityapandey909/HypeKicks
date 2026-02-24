@@ -148,17 +148,11 @@ a {
 }
 
 .brand-badge {
-  height: 2.05rem;
-  width: 2.05rem;
-  border-radius: 999px;
-  background: conic-gradient(
-    from 120deg,
-    var(--accent),
-    #ff986f 35%,
-    var(--brand-ink) 70%,
-    var(--accent) 100%
-  );
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.75);
+  height: 2.1rem;
+  width: 2.1rem;
+  display: block;
+  border-radius: 0.65rem;
+  filter: drop-shadow(0 6px 10px rgba(16, 19, 27, 0.24));
 }
 
 .brand-mark h1 {

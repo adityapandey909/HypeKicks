@@ -16,6 +16,8 @@ export default function Navbar({
   themeMode,
   onThemeChange,
 }) {
+  const brandMarkSrc = `${import.meta.env.BASE_URL}hypekicks-mark.svg`;
+
   return (
     <header className="topbar">
       <div className="topbar-inner">
@@ -25,7 +27,7 @@ export default function Navbar({
           aria-label="HypeKicks home"
           onClick={() => onNavigate("/")}
         >
-          <span className="brand-badge" />
+          <img src={brandMarkSrc} alt="" className="brand-badge" aria-hidden="true" />
           <h1>
             Hype<span>Kicks</span>
           </h1>
