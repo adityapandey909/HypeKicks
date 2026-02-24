@@ -1,0 +1,287 @@
+{
+  "generatedAt": "2026-02-24T05:00:00.000Z",
+  "count": 12,
+  "products": [
+    {
+      "_id": "demo-jordan-retro-pulse",
+      "name": "Jordan Retro Pulse",
+      "slug": "jordan-retro-pulse",
+      "description": "Court-inspired statement pair with elevated cushioning and premium overlays.",
+      "price": 189.99,
+      "image": "https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1543508282-6319a3e2621f?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "Jordan",
+      "category": "Basketball",
+      "tags": ["court", "retro"],
+      "sizeOptions": [
+        { "size": "8", "stock": 4 },
+        { "size": "9", "stock": 5 },
+        { "size": "10", "stock": 3 }
+      ],
+      "totalStock": 12,
+      "featured": true,
+      "createdAt": "2026-02-23T08:00:00.000Z"
+    },
+    {
+      "_id": "demo-adidas-ultraboost-drift",
+      "name": "Adidas Ultraboost Drift",
+      "slug": "adidas-ultraboost-drift",
+      "description": "Responsive everyday runner with breathable knit upper.",
+      "price": 169.99,
+      "image": "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1597248881519-db089d3744a5?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "Adidas",
+      "category": "Running",
+      "tags": ["running", "boost"],
+      "sizeOptions": [
+        { "size": "7", "stock": 2 },
+        { "size": "8", "stock": 3 },
+        { "size": "9", "stock": 2 },
+        { "size": "10", "stock": 2 }
+      ],
+      "totalStock": 9,
+      "featured": true,
+      "createdAt": "2026-02-22T08:00:00.000Z"
+    },
+    {
+      "_id": "demo-nike-air-force-1",
+      "name": "Nike Air Force 1",
+      "slug": "nike-air-force-1",
+      "description": "Iconic low-top with clean lines and all-day street comfort.",
+      "price": 129.99,
+      "image": "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1584735175315-9d5df23860e6?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "Nike",
+      "category": "Lifestyle",
+      "tags": ["classic", "streetwear"],
+      "sizeOptions": [
+        { "size": "8", "stock": 3 },
+        { "size": "9", "stock": 4 },
+        { "size": "10", "stock": 3 }
+      ],
+      "totalStock": 10,
+      "featured": false,
+      "createdAt": "2026-02-21T08:00:00.000Z"
+    },
+    {
+      "_id": "demo-nike-zoom-tempest",
+      "name": "Nike Zoom Tempest",
+      "slug": "nike-zoom-tempest",
+      "description": "Lightweight daily trainer with responsive foam and engineered mesh.",
+      "price": 159.99,
+      "image": "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1512374382149-233c42b6a83b?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "Nike",
+      "category": "Running",
+      "tags": ["running", "zoom"],
+      "sizeOptions": [
+        { "size": "8", "stock": 3 },
+        { "size": "9", "stock": 4 },
+        { "size": "10", "stock": 3 }
+      ],
+      "totalStock": 10,
+      "featured": true,
+      "createdAt": "2026-02-20T08:00:00.000Z"
+    },
+    {
+      "_id": "demo-adidas-forum-elevate",
+      "name": "Adidas Forum Elevate",
+      "slug": "adidas-forum-elevate",
+      "description": "Retro-inspired court silhouette with premium leather panels.",
+      "price": 139.99,
+      "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "Adidas",
+      "category": "Lifestyle",
+      "tags": ["retro", "court"],
+      "sizeOptions": [
+        { "size": "7", "stock": 2 },
+        { "size": "8", "stock": 3 },
+        { "size": "9", "stock": 2 },
+        { "size": "10", "stock": 2 }
+      ],
+      "totalStock": 9,
+      "featured": false,
+      "createdAt": "2026-02-19T08:00:00.000Z"
+    },
+    {
+      "_id": "demo-puma-velocity-shift",
+      "name": "Puma Velocity Shift",
+      "slug": "puma-velocity-shift",
+      "description": "Stable cross-training shoe built for gym sessions and HIIT.",
+      "price": 129.99,
+      "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1529810313688-44ea1c2d81d3?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "Puma",
+      "category": "Training",
+      "tags": ["training", "gym"],
+      "sizeOptions": [
+        { "size": "8", "stock": 4 },
+        { "size": "9", "stock": 3 },
+        { "size": "10", "stock": 3 }
+      ],
+      "totalStock": 10,
+      "featured": false,
+      "createdAt": "2026-02-18T08:00:00.000Z"
+    },
+    {
+      "_id": "demo-new-balance-9060-metro",
+      "name": "New Balance 9060 Metro",
+      "slug": "new-balance-9060-metro",
+      "description": "Chunky modern runner blending comfort cushioning and bold styling.",
+      "price": 179.99,
+      "image": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1576672843344-f01907a9d40c?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "New Balance",
+      "category": "Lifestyle",
+      "tags": ["chunky", "streetwear"],
+      "sizeOptions": [
+        { "size": "7", "stock": 3 },
+        { "size": "8", "stock": 4 },
+        { "size": "9", "stock": 4 },
+        { "size": "10", "stock": 2 }
+      ],
+      "totalStock": 13,
+      "featured": true,
+      "createdAt": "2026-02-17T08:00:00.000Z"
+    },
+    {
+      "_id": "demo-asics-gel-nova-x",
+      "name": "ASICS Gel Nova X",
+      "slug": "asics-gel-nova-x",
+      "description": "Comfort-first neutral runner with GEL impact protection.",
+      "price": 149.99,
+      "image": "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "ASICS",
+      "category": "Running",
+      "tags": ["gel", "running"],
+      "sizeOptions": [
+        { "size": "8", "stock": 3 },
+        { "size": "9", "stock": 3 },
+        { "size": "10", "stock": 4 }
+      ],
+      "totalStock": 10,
+      "featured": false,
+      "createdAt": "2026-02-16T08:00:00.000Z"
+    },
+    {
+      "_id": "demo-converse-court-pro-mid",
+      "name": "Converse Court Pro Mid",
+      "slug": "converse-court-pro-mid",
+      "description": "Classic mid-top court style refreshed with extra ankle support.",
+      "price": 119.99,
+      "image": "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "Converse",
+      "category": "Basketball",
+      "tags": ["mid-top", "court"],
+      "sizeOptions": [
+        { "size": "7", "stock": 2 },
+        { "size": "8", "stock": 3 },
+        { "size": "9", "stock": 3 },
+        { "size": "10", "stock": 2 }
+      ],
+      "totalStock": 10,
+      "featured": false,
+      "createdAt": "2026-02-15T08:00:00.000Z"
+    },
+    {
+      "_id": "demo-reebok-floatride-axis",
+      "name": "Reebok Floatride Axis",
+      "slug": "reebok-floatride-axis",
+      "description": "Energy-return foam runner tuned for daily mileage and comfort.",
+      "price": 134.99,
+      "image": "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "Reebok",
+      "category": "Running",
+      "tags": ["foam", "daily"],
+      "sizeOptions": [
+        { "size": "8", "stock": 3 },
+        { "size": "9", "stock": 4 },
+        { "size": "10", "stock": 3 }
+      ],
+      "totalStock": 10,
+      "featured": false,
+      "createdAt": "2026-02-14T08:00:00.000Z"
+    },
+    {
+      "_id": "demo-vans-sk8-hi-echo",
+      "name": "Vans Sk8-Hi Echo",
+      "slug": "vans-sk8-hi-echo",
+      "description": "Iconic high-top skate silhouette with reinforced overlays.",
+      "price": 109.99,
+      "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "Vans",
+      "category": "Lifestyle",
+      "tags": ["skate", "high-top"],
+      "sizeOptions": [
+        { "size": "7", "stock": 2 },
+        { "size": "8", "stock": 3 },
+        { "size": "9", "stock": 3 },
+        { "size": "10", "stock": 2 }
+      ],
+      "totalStock": 10,
+      "featured": false,
+      "createdAt": "2026-02-13T08:00:00.000Z"
+    },
+    {
+      "_id": "demo-under-armour-flow-surge",
+      "name": "Under Armour Flow Surge",
+      "slug": "under-armour-flow-surge",
+      "description": "Low-profile trainer with grippy outsole for quick directional moves.",
+      "price": 124.99,
+      "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1608667508764-33cf0726b13a?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "brand": "Under Armour",
+      "category": "Training",
+      "tags": ["training", "grip"],
+      "sizeOptions": [
+        { "size": "8", "stock": 3 },
+        { "size": "9", "stock": 3 },
+        { "size": "10", "stock": 3 }
+      ],
+      "totalStock": 9,
+      "featured": false,
+      "createdAt": "2026-02-12T08:00:00.000Z"
+    }
+  ]
+}

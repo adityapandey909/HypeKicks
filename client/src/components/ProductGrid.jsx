@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import api from "../lib/api";
+import { applyCatalogFilters, buildCatalogFilters, loadDemoCatalog } from "../lib/demoCatalog";
 
 function formatPrice(value) {
   if (typeof value !== "number" || Number.isNaN(value)) return "Price on request";
@@ -70,8 +71,29 @@ export default function ProductGrid({ onAddToCart, onOpenProduct, initialCategor
         setCategories(payload?.filters?.categories || []);
       } catch {
         if (!active) return;
-        setProducts([]);
-        setError("Could not load products. Please try again shortly.");
+        try {
+          const demoCatalog = await loadDemoCatalog();
+          if (!active) return;
+
+          const demoRows = applyCatalogFilters(demoCatalog, {
+            search,
+            brand,
+            category,
+            sort,
+            minPrice,
+            maxPrice,
+          });
+          const demoFilters = buildCatalogFilters(demoCatalog);
+
+          setProducts(demoRows);
+          setBrands(demoFilters.brands);
+          setCategories(demoFilters.categories);
+          setError("Live API is unavailable. Showing demo catalog.");
+        } catch {
+          if (!active) return;
+          setProducts([]);
+          setError("Could not load products. Please try again shortly.");
+        }
       } finally {
         if (active) setLoading(false);
       }

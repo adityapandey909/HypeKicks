@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import api from "../src/lib/api";
+import { buildRelatedProducts, findProductById, loadDemoCatalog } from "../src/lib/demoCatalog";
 
 function currency(value = 0) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
@@ -45,7 +46,28 @@ export default function ProductDetail({ productId, onAddToCart, onNavigate }) {
         setRelated(relatedRes.data?.products || []);
       } catch {
         if (!active) return;
-        setError("Could not load product details.");
+        try {
+          const demoCatalog = await loadDemoCatalog();
+          const demoProduct = findProductById(demoCatalog, productId);
+          if (!demoProduct) {
+            setError("Could not load product details.");
+            return;
+          }
+
+          const demoImages =
+            Array.isArray(demoProduct.images) && demoProduct.images.length > 0
+              ? demoProduct.images
+              : [demoProduct.image].filter(Boolean);
+
+          setProduct(demoProduct);
+          setSelectedImage(demoImages[0] || "");
+          setSelectedSize(getInitialSize(demoProduct));
+          setRelated(buildRelatedProducts(demoCatalog, demoProduct, 4));
+          setError("");
+        } catch {
+          if (!active) return;
+          setError("Could not load product details.");
+        }
       } finally {
         if (active) setLoading(false);
       }
