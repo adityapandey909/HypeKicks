@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="hkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6f43" />
+      <stop offset="100%" stop-color="#d64a27" />
+    </linearGradient>
+  </defs>
+
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="#162033" />
+  <rect
+    x="10"
+    y="10"
+    width="108"
+    height="108"
+    rx="26"
+    fill="none"
+    stroke="url(#hkGradient)"
+    stroke-width="4"
+  />
+
+  <path
+    d="M28 30h12v24h18V30h12v68H58V68H40v30H28z"
+    fill="#f7f1e8"
+  />
+  <path
+    d="M74 30h12v28l21-28h14L96 63l26 35h-14L88 71l-2 2v25H74z"
+    fill="#f7f1e8"
+  />
+
+  <path
+    d="M22 101c13 9 69 9 84-3"
+    fill="none"
+    stroke="url(#hkGradient)"
+    stroke-linecap="round"
+    stroke-width="6"
+  />
+</svg>
