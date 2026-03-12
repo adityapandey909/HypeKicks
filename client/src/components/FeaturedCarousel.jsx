@@ -61,13 +61,19 @@ export default function FeaturedCarousel({ onAddToCart, onOpenProduct }) {
         if (!active) return;
         const payload = res.data;
         const rows = Array.isArray(payload) ? payload : payload.products || [];
-        setSlides(buildFeaturedRows(rows));
+        const featuredRows = buildFeaturedRows(rows);
+        if (featuredRows.length === 0) {
+          throw new Error("Live featured catalog is empty");
+        }
+
+        setSlides(featuredRows);
       } catch {
         if (!active) return;
         try {
           const demoRows = await loadDemoCatalog();
           if (!active) return;
-          setSlides(buildFeaturedRows(demoRows));
+          const featuredRows = buildFeaturedRows(demoRows);
+          setSlides(featuredRows);
           setError("Showing featured demo drops.");
         } catch {
           if (!active) return;

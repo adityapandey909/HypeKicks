@@ -161,6 +161,10 @@ export default function ProductGrid({
         if (!active) return;
         const payload = res.data;
         const rows = Array.isArray(payload) ? payload : payload.products || [];
+        if (rows.length === 0) {
+          throw new Error("Live catalog is empty");
+        }
+
         setProducts(rows);
         setBrands(payload?.filters?.brands || []);
         setCategories(payload?.filters?.categories || []);
@@ -183,7 +187,7 @@ export default function ProductGrid({
           setProducts(demoRows);
           setBrands(demoFilters.brands);
           setCategories(demoFilters.categories);
-          setError("Live API is unavailable. Showing demo catalog.");
+          setError("Live API is unavailable or empty. Showing demo catalog.");
         } catch {
           if (!active) return;
           setProducts([]);

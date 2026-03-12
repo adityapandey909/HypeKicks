@@ -182,6 +182,10 @@ export default function App() {
         if (!active) return;
         const payload = response.data;
         const rows = Array.isArray(payload) ? payload : payload.products || [];
+        if (!rows.length) {
+          throw new Error("Live search catalog is empty");
+        }
+
         setSearchProducts(rows);
       } catch {
         if (!active) return;
