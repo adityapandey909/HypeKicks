@@ -171,7 +171,7 @@ export default function FeaturedCarousel({ onAddToCart, onOpenProduct }) {
             alt={activeSlide.name}
             decoding="async"
           />
-          <span className="image-watermark" aria-hidden="true">HYPEKICKS</span>
+          <span className="image-watermark image-watermark-focus" aria-hidden="true">HYPEKICKS</span>
           <div className="featured-pills">
             <span>{activeSlide.brand || "HypeKicks"}</span>
             <span>{stock} in stock</span>

@@ -532,7 +532,7 @@ export default function ProductGrid({
                             />
                           )}
                           {product.brand && <span className="brand-chip">{product.brand}</span>}
-                          <span className="image-watermark" aria-hidden="true">HYPEKICKS</span>
+                          <span className="image-watermark image-watermark-card" aria-hidden="true">HYPEKICKS</span>
                         </div>
 
                         <div className="sneaker-body">
@@ -726,7 +726,7 @@ export default function ProductGrid({
                     alt={quickViewProduct.name}
                     decoding="async"
                   />
-                  <span className="image-watermark" aria-hidden="true">HYPEKICKS</span>
+                  <span className="image-watermark image-watermark-focus" aria-hidden="true">HYPEKICKS</span>
                 </div>
                 <div className="quick-view-thumbs">
                   {activeQuickViewGallery.map((image) => (

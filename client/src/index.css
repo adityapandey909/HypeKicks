@@ -2318,22 +2318,45 @@ a {
 
 .image-watermark {
   position: absolute;
-  right: 0.56rem;
-  bottom: 0.56rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
   z-index: 2;
   pointer-events: none;
   user-select: none;
   -webkit-user-select: none;
   border: 1px solid rgba(23, 25, 34, 0.2);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.76);
-  color: rgba(23, 25, 34, 0.76);
-  font-size: 0.58rem;
+  background: rgba(255, 255, 255, 0.64);
+  color: rgba(23, 25, 34, 0.68);
+  font-size: 0.54rem;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 0.2rem 0.42rem;
+  padding: 0.18rem 0.38rem;
   backdrop-filter: blur(3px);
+  opacity: 0.46;
+}
+
+.image-watermark-focus {
+  opacity: 0.44;
+}
+
+.image-watermark-card {
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.sneaker-card:hover .image-watermark-card,
+.sneaker-card:focus-within .image-watermark-card {
+  opacity: 0.4;
+  transform: translateY(0);
+}
+
+@media (max-width: 760px) {
+  .image-watermark-card {
+    display: none;
+  }
 }
 
 .quick-view-thumbs {
@@ -4243,7 +4266,16 @@ h3,
 }
 
 :root[data-theme="dark"] .image-watermark {
-  background: rgba(7, 13, 21, 0.78);
-  border-color: rgba(156, 180, 216, 0.3);
-  color: rgba(214, 228, 255, 0.9);
+  background: rgba(7, 13, 21, 0.66);
+  border-color: rgba(156, 180, 216, 0.28);
+  color: rgba(214, 228, 255, 0.82);
+}
+
+:root[data-theme="dark"] .image-watermark-focus {
+  opacity: 0.46;
+}
+
+:root[data-theme="dark"] .sneaker-card:hover .image-watermark-card,
+:root[data-theme="dark"] .sneaker-card:focus-within .image-watermark-card {
+  opacity: 0.44;
 }

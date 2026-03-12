@@ -315,7 +315,7 @@ export default function ProductDetail({
               alt={product.name}
               decoding="async"
             />
-            <span className="image-watermark" aria-hidden="true">HYPEKICKS</span>
+            <span className="image-watermark image-watermark-focus" aria-hidden="true">HYPEKICKS</span>
           </div>
           <div className="detail-thumbs detail-thumbs-upgraded" role="list" aria-label="Product gallery">
             {gallery.map((image) => (
