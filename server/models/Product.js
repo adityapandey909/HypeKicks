@@ -8,6 +8,18 @@ const productSizeSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const productReviewSchema = new mongoose.Schema(
+  {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    userName: { type: String, required: true, trim: true },
+    rating: { type: Number, required: true, min: 1, max: 5 },
+    title: { type: String, default: "", trim: true },
+    body: { type: String, default: "", trim: true },
+    createdAt: { type: Date, default: Date.now },
+  },
+  { _id: true }
+);
+
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
@@ -22,6 +34,7 @@ const productSchema = new mongoose.Schema(
     sizeOptions: [productSizeSchema],
     totalStock: { type: Number, default: 0, min: 0 },
     featured: { type: Boolean, default: false },
+    reviews: { type: [productReviewSchema], default: [] },
   },
   { timestamps: true }
 );

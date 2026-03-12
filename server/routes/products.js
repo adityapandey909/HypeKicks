@@ -2,6 +2,7 @@
 
 import express from "express";
 import Product from "../models/Product.js";
+import User from "../models/User.js";
 import auth from "../middleware/auth.js";
 import admin from "../middleware/admin.js";
 import {
@@ -80,6 +81,27 @@ function parseOptionalNumber(value) {
 
 	const parsed = Number(value);
 	return Number.isFinite(parsed) ? parsed : NaN;
+}
+
+function serializeReview(review) {
+	return {
+		id: review?._id,
+		userName: review?.userName || "HypeKicks Member",
+		rating: Number(review?.rating) || 0,
+		title: sanitizeText(review?.title),
+		body: sanitizeText(review?.body),
+		createdAt: review?.createdAt || null,
+	};
+}
+
+function buildReviewSummary(reviews = []) {
+	if (!Array.isArray(reviews) || reviews.length === 0) {
+		return { count: 0, average: 0 };
+	}
+
+	const total = reviews.reduce((sum, review) => sum + (Number(review.rating) || 0), 0);
+	const average = Math.round((total / reviews.length) * 10) / 10;
+	return { count: reviews.length, average };
 }
 
 // GET all products
@@ -175,6 +197,86 @@ router.get("/related/:id", async (req, res) => {
 		return res.json({ products: fallback });
 	} catch {
 		return res.status(500).json({ message: "Failed to fetch related products" });
+	}
+});
+
+router.get("/:id/reviews", async (req, res) => {
+	try {
+		const product = await Product.findById(req.params.id).select("reviews");
+		if (!product) return res.status(404).json({ message: "Product not found" });
+
+		const reviews = [...(Array.isArray(product.reviews) ? product.reviews : [])]
+			.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
+			.map(serializeReview);
+
+		return res.json({
+			reviews,
+			summary: buildReviewSummary(reviews),
+		});
+	} catch {
+		return res.status(500).json({ message: "Failed to fetch reviews" });
+	}
+});
+
+router.post("/:id/reviews", auth, async (req, res) => {
+	try {
+		const rating = Math.max(1, Math.min(5, Math.round(toSafeNumber(req.body?.rating, 0))));
+		const title = sanitizeText(req.body?.title);
+		const body = sanitizeText(req.body?.body);
+
+		if (!rating || !body) {
+			return res.status(400).json({ message: "Rating and review text are required" });
+		}
+
+		const [product, user] = await Promise.all([
+			Product.findById(req.params.id),
+			User.findById(req.user.id).select("name"),
+		]);
+
+		if (!product) return res.status(404).json({ message: "Product not found" });
+		if (!user) return res.status(401).json({ message: "User not found" });
+
+		const existingIndex = Array.isArray(product.reviews)
+			? product.reviews.findIndex((review) => String(review.user) === String(req.user.id))
+			: -1;
+
+		const payload = {
+			user: req.user.id,
+			userName: sanitizeText(user.name) || "HypeKicks Member",
+			rating,
+			title,
+			body,
+			createdAt: new Date(),
+		};
+
+		if (existingIndex >= 0) {
+			product.reviews[existingIndex] = {
+				...product.reviews[existingIndex].toObject(),
+				...payload,
+			};
+		} else {
+			product.reviews.push(payload);
+		}
+
+		if (product.reviews.length > 250) {
+			product.reviews = product.reviews
+				.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
+				.slice(0, 250);
+		}
+
+		await product.save();
+
+		const reviews = [...product.reviews]
+			.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
+			.map(serializeReview);
+
+		return res.status(existingIndex >= 0 ? 200 : 201).json({
+			message: existingIndex >= 0 ? "Review updated" : "Review added",
+			reviews,
+			summary: buildReviewSummary(reviews),
+		});
+	} catch {
+		return res.status(500).json({ message: "Failed to save review" });
 	}
 });
 

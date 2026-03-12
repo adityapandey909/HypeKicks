@@ -1,4 +1,19 @@
 const DEMO_CATALOG_PATH = `${import.meta.env.BASE_URL}products-demo.json`;
+const BASE_URL = import.meta.env.BASE_URL || "/";
+
+function resolveAssetUrl(value = "") {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  if (raw.startsWith("http://") || raw.startsWith("https://") || raw.startsWith("data:")) {
+    return raw;
+  }
+
+  const normalized = raw.replace(/^\/+/, "");
+  if (BASE_URL.endsWith("/")) {
+    return `${BASE_URL}${normalized}`;
+  }
+  return `${BASE_URL}/${normalized}`;
+}
 
 function parseOptionalNumber(value) {
   if (value === "" || value === null || value === undefined) return Number.NaN;
@@ -7,9 +22,19 @@ function parseOptionalNumber(value) {
 }
 
 function normalizeProducts(payload) {
-  if (Array.isArray(payload)) return payload;
-  if (Array.isArray(payload?.products)) return payload.products;
-  return [];
+  const rows = Array.isArray(payload) ? payload : Array.isArray(payload?.products) ? payload.products : [];
+
+  return rows.map((product) => {
+    const gallery = Array.isArray(product?.images) ? product.images.map((image) => resolveAssetUrl(image)) : [];
+    const image = resolveAssetUrl(product?.image) || gallery[0] || "";
+    const images = gallery.length > 0 ? gallery : image ? [image] : [];
+
+    return {
+      ...product,
+      image,
+      images,
+    };
+  });
 }
 
 export async function loadDemoCatalog() {

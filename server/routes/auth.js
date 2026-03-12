@@ -1,6 +1,7 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import Product from "../models/Product.js";
 import User from "../models/User.js";
 import auth from "../middleware/auth.js";
 import { buildTokenExpiry, generateRandomToken, hashToken } from "../utils/token.js";
@@ -35,6 +36,65 @@ function serializeUser(user) {
     role: user.role,
     emailVerified: user.emailVerified,
   };
+}
+
+function serializeProductSummary(product) {
+  if (!product) return null;
+
+  const sizeOptions = Array.isArray(product.sizeOptions)
+    ? product.sizeOptions.map((option) => ({
+      size: sanitizeText(option?.size),
+      stock: Math.max(0, Math.floor(Number(option?.stock) || 0)),
+    }))
+    : [];
+
+  return {
+    productId: String(product._id || ""),
+    name: sanitizeText(product.name),
+    brand: sanitizeText(product.brand),
+    image: sanitizeText(product.image),
+    price: Number(product.price) || 0,
+    category: sanitizeText(product.category),
+    totalStock: Number(product.totalStock) || 0,
+    sizeOptions,
+  };
+}
+
+function mapProductById(products = []) {
+  const table = new Map();
+  for (const product of products) {
+    table.set(String(product._id || ""), product);
+  }
+  return table;
+}
+
+function sanitizeObjectId(input = "") {
+  return sanitizeText(input);
+}
+
+async function hydrateCollectionItems(collection = [], key = "addedAt") {
+  const ids = collection
+    .map((entry) => String(entry?.product || "").trim())
+    .filter(Boolean);
+
+  if (ids.length === 0) return [];
+
+  const products = await Product.find({ _id: { $in: ids } }).select(
+    "_id name brand image price category totalStock sizeOptions"
+  );
+  const productMap = mapProductById(products);
+
+  return collection
+    .map((entry) => {
+      const productId = String(entry?.product || "").trim();
+      const product = productMap.get(productId);
+      if (!product) return null;
+      return {
+        ...serializeProductSummary(product),
+        [key]: entry?.[key] || null,
+      };
+    })
+    .filter(Boolean);
 }
 
 // Register
@@ -150,6 +210,106 @@ router.get("/me", auth, async (req, res) => {
   } catch {
     console.error("Auth me error");
     return res.status(500).json({ message: "Failed to load user profile" });
+  }
+});
+
+router.get("/wishlist", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("wishlist");
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const orderedWishlist = [...(Array.isArray(user.wishlist) ? user.wishlist : [])]
+      .sort((a, b) => new Date(b.addedAt || 0).getTime() - new Date(a.addedAt || 0).getTime());
+
+    const items = await hydrateCollectionItems(orderedWishlist, "addedAt");
+    return res.json({ items });
+  } catch {
+    return res.status(500).json({ message: "Failed to load wishlist" });
+  }
+});
+
+router.put("/wishlist/toggle", auth, async (req, res) => {
+  try {
+    const productId = sanitizeObjectId(req.body?.productId);
+    if (!productId) {
+      return res.status(400).json({ message: "productId is required" });
+    }
+
+    const [user, product] = await Promise.all([
+      User.findById(req.user.id).select("wishlist"),
+      Product.findById(productId).select("_id"),
+    ]);
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!product) return res.status(404).json({ message: "Product not found" });
+
+    const current = Array.isArray(user.wishlist) ? user.wishlist : [];
+    const existingIndex = current.findIndex((entry) => String(entry?.product || "") === productId);
+
+    if (existingIndex >= 0) {
+      current.splice(existingIndex, 1);
+    } else {
+      current.unshift({
+        product: product._id,
+        addedAt: new Date(),
+      });
+    }
+
+    user.wishlist = current.slice(0, 80);
+    await user.save();
+
+    const items = await hydrateCollectionItems(user.wishlist, "addedAt");
+    return res.json({ items });
+  } catch {
+    return res.status(500).json({ message: "Failed to update wishlist" });
+  }
+});
+
+router.get("/recently-viewed", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("recentlyViewed");
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const orderedItems = [...(Array.isArray(user.recentlyViewed) ? user.recentlyViewed : [])]
+      .sort((a, b) => new Date(b.viewedAt || 0).getTime() - new Date(a.viewedAt || 0).getTime());
+
+    const items = await hydrateCollectionItems(orderedItems, "viewedAt");
+    return res.json({ items });
+  } catch {
+    return res.status(500).json({ message: "Failed to load recently viewed items" });
+  }
+});
+
+router.post("/recently-viewed", auth, async (req, res) => {
+  try {
+    const productId = sanitizeObjectId(req.body?.productId);
+    if (!productId) {
+      return res.status(400).json({ message: "productId is required" });
+    }
+
+    const [user, product] = await Promise.all([
+      User.findById(req.user.id).select("recentlyViewed"),
+      Product.findById(productId).select("_id"),
+    ]);
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!product) return res.status(404).json({ message: "Product not found" });
+
+    const next = (Array.isArray(user.recentlyViewed) ? user.recentlyViewed : [])
+      .filter((entry) => String(entry?.product || "") !== productId);
+
+    next.unshift({
+      product: product._id,
+      viewedAt: new Date(),
+    });
+
+    user.recentlyViewed = next.slice(0, 40);
+    await user.save();
+
+    const items = await hydrateCollectionItems(user.recentlyViewed, "viewedAt");
+    return res.status(201).json({ items });
+  } catch {
+    return res.status(500).json({ message: "Failed to update recently viewed items" });
   }
 });
 
